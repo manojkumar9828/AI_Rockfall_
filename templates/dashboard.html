@@ -1,0 +1,148 @@
+{% extends "base.html" %}
+{% block title %}Dashboard — RockGuard AI{% endblock %}
+
+{% block content %}
+<div class="container py-4">
+  <div class="mb-4 fade-in">
+    <h1 class="fw-bold mb-1"><i class="fas fa-tachometer-alt text-warning"></i> Dashboard</h1>
+    <p class="text-muted mb-0">Real-time monitoring overview and prediction statistics</p>
+  </div>
+
+  <!-- Stat Cards -->
+  <div class="row g-3 mb-4">
+    <div class="col-6 col-lg">
+      <div class="stat-card fade-in">
+        <div class="stat-icon"><i class="fas fa-images text-warning"></i></div>
+        <div class="stat-value">{{ stats.total }}</div>
+        <div class="stat-label">Total Images</div>
+      </div>
+    </div>
+    <div class="col-6 col-lg">
+      <div class="stat-card safe fade-in">
+        <div class="stat-icon"><i class="fas fa-check-circle" style="color:#66bb6a;"></i></div>
+        <div class="stat-value">{{ stats.safe }}</div>
+        <div class="stat-label">Safe Predictions</div>
+      </div>
+    </div>
+    <div class="col-6 col-lg">
+      <div class="stat-card warning fade-in">
+        <div class="stat-icon"><i class="fas fa-exclamation-circle" style="color:#FF6F00;"></i></div>
+        <div class="stat-value">{{ stats.warning }}</div>
+        <div class="stat-label">Warnings</div>
+      </div>
+    </div>
+    <div class="col-6 col-lg">
+      <div class="stat-card danger fade-in">
+        <div class="stat-icon"><i class="fas fa-times-circle" style="color:#ff5252;"></i></div>
+        <div class="stat-value">{{ stats.danger }}</div>
+        <div class="stat-label">Dangerous</div>
+      </div>
+    </div>
+    <div class="col-6 col-lg">
+      <div class="stat-card alert fade-in">
+        <div class="stat-icon"><i class="fas fa-bell text-warning"></i></div>
+        <div class="stat-value">{{ stats.alerts }}</div>
+        <div class="stat-label">Alerts Generated</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Charts -->
+  <div class="row g-4">
+    <div class="col-lg-4">
+      <div class="card-rockfall">
+        <h5 class="mb-3"><i class="fas fa-chart-pie text-warning"></i> Risk Distribution</h5>
+        <canvas id="pieChart" height="200"></canvas>
+      </div>
+    </div>
+    <div class="col-lg-4">
+      <div class="card-rockfall">
+        <h5 class="mb-3"><i class="fas fa-chart-bar text-warning"></i> Prediction Statistics</h5>
+        <canvas id="barChart" height="200"></canvas>
+      </div>
+    </div>
+    <div class="col-lg-4">
+      <div class="card-rockfall">
+        <h5 class="mb-3"><i class="fas fa-chart-line text-warning"></i> Prediction Trend (7 days)</h5>
+        <canvas id="lineChart" height="200"></canvas>
+      </div>
+    </div>
+  </div>
+
+  <div class="row g-4 mt-1">
+    <div class="col-lg-12">
+      <div class="card-rockfall">
+        <div class="d-flex justify-content-between align-items-center mb-3">
+          <h5 class="mb-0"><i class="fas fa-bolt text-warning"></i> Quick Actions</h5>
+        </div>
+        <div class="row g-3">
+          <div class="col-md-3"><a href="{{ url_for('upload') }}" class="btn btn-rockfall w-100"><i class="fas fa-upload"></i> New Detection</a></div>
+          <div class="col-md-3"><a href="{{ url_for('history') }}" class="btn btn-outline-rockfall w-100"><i class="fas fa-history"></i> View History</a></div>
+          <div class="col-md-3"><a href="{{ url_for('reports') }}" class="btn btn-outline-rockfall w-100"><i class="fas fa-file-alt"></i> Reports</a></div>
+          <div class="col-md-3"><a href="{{ url_for('settings') }}" class="btn btn-outline-rockfall w-100"><i class="fas fa-cog"></i> Settings</a></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+const stats = {{ stats | tojson }};
+const labels = {{ labels | tojson }};
+const counts = {{ counts | tojson }};
+
+Chart.defaults.color = '#999';
+Chart.defaults.borderColor = 'rgba(255,255,255,0.05)';
+
+// Pie Chart
+new Chart(document.getElementById('pieChart'), {
+  type: 'doughnut',
+  data: {
+    labels: ['Safe', 'Warning', 'Dangerous'],
+    datasets: [{
+      data: [stats.safe, stats.warning, stats.danger],
+      backgroundColor: ['#2E7D32', '#FF6F00', '#D32F2F'],
+      borderWidth: 2,
+      borderColor: '#1a1a1a'
+    }]
+  },
+  options: { responsive: true, plugins: { legend: { position: 'bottom' } } }
+});
+
+// Bar Chart
+new Chart(document.getElementById('barChart'), {
+  type: 'bar',
+  data: {
+    labels: ['Safe', 'Warning', 'Dangerous', 'Alerts'],
+    datasets: [{
+      label: 'Count',
+      data: [stats.safe, stats.warning, stats.danger, stats.alerts],
+      backgroundColor: ['#2E7D32', '#FF6F00', '#D32F2F', '#FFC107'],
+      borderRadius: 6
+    }]
+  },
+  options: { responsive: true, plugins: { legend: { display: false } }, scales: { y: { beginAtZero: true } } }
+});
+
+// Line Chart
+new Chart(document.getElementById('lineChart'), {
+  type: 'line',
+  data: {
+    labels: labels,
+    datasets: [{
+      label: 'Predictions',
+      data: counts,
+      borderColor: '#FFC107',
+      backgroundColor: 'rgba(255,193,7,0.1)',
+      fill: true,
+      tension: 0.4,
+      pointBackgroundColor: '#FF6F00',
+      pointRadius: 5
+    }]
+  },
+  options: { responsive: true, scales: { y: { beginAtZero: true } } }
+});
+</script>
+{% endblock %}

@@ -1,0 +1,71 @@
+{% extends "base.html" %}
+{% block title %}Mine Information — RockGuard AI{% endblock %}
+
+{% block content %}
+<div class="container py-5">
+  <div class="mb-4 fade-in">
+    <h1 class="fw-bold mb-1"><i class="fas fa-industry text-warning"></i> Mine Information</h1>
+    <p class="text-muted mb-0">Open pit mine details and monitoring context</p>
+  </div>
+
+  <div class="row g-4">
+    <div class="col-lg-8">
+      <div class="card-rockfall">
+        <h4 class="mb-3">Site Overview</h4>
+        <table class="table table-rockfall">
+          <tr><th style="width:40%">Mine Name</th><td>Greenfield Open Pit Mine</td></tr>
+          <tr><th>Location</th><td>Chhattisgarh, India</td></tr>
+          <tr><th>Type</th><td>Open Pit / Surface Mine</td></tr>
+          <tr><th>Commodity</th><td>Iron Ore</td></tr>
+          <tr><th>Operating Depth</th><td>180 meters</td></tr>
+          <tr><th>Slope Angle</th><td>45-55 degrees</td></tr>
+          <tr><th>Daily Production</th><td>8,000 tonnes</td></tr>
+          <tr><th>Workforce</th><td>450 personnel</td></tr>
+          <tr><th>Monitoring System</th><td>RockGuard AI (CNN-based)</td></tr>
+        </table>
+      </div>
+    </div>
+    <div class="col-lg-4">
+      <div class="card-rockfall">
+        <div class="icon-circle"><i class="fas fa-cloud-sun-rain"></i></div>
+        <h5>Weather Information</h5>
+        <p class="text-muted small">Placeholder for live weather data integration</p>
+        <div class="d-flex justify-content-between mb-2"><span>Temperature</span><span class="fw-bold">32°C</span></div>
+        <div class="d-flex justify-content-between mb-2"><span>Humidity</span><span class="fw-bold">68%</span></div>
+        <div class="d-flex justify-content-between mb-2"><span>Wind Speed</span><span class="fw-bold">12 km/h</span></div>
+        <div class="d-flex justify-content-between"><span>Rainfall</span><span class="fw-bold">0 mm</span></div>
+      </div>
+      <div class="card-rockfall mt-4">
+        <div class="icon-circle"><i class="fas fa-map-marked-alt"></i></div>
+        <h5>GPS Location</h5>
+        <p class="text-muted small">Placeholder for geolocation</p>
+        <p class="mb-0"><i class="fas fa-map-pin text-warning"></i> 21.2514° N, 81.6296° E</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="row g-4 mt-1">
+    <div class="col-md-6">
+      <div class="card-rockfall">
+        <h5><i class="fas fa-hard-hat text-warning"></i> Safety Protocols</h5>
+        <ul style="list-style:none;padding:0;">
+          <li class="mb-2"><i class="fas fa-check text-warning"></i> Daily geotechnical inspection</li>
+          <li class="mb-2"><i class="fas fa-check text-warning"></i> AI-based slope monitoring every 4 hours</li>
+          <li class="mb-2"><i class="fas fa-check text-warning"></i> Mandatory PPE for all personnel</li>
+          <li class="mb-2"><i class="fas fa-check text-warning"></i> Evacuation drills monthly</li>
+          <li><i class="fas fa-check text-warning"></i> Automated alert dispatch on danger detection</li>
+        </ul>
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="card-rockfall">
+        <h5><i class="fas fa-video text-warning"></i> Live Camera Detection</h5>
+        <p class="text-muted small mb-3">Placeholder for real-time camera feed integration</p>
+        <div style="background:rgba(0,0,0,0.4);border-radius:10px;height:150px;display:flex;align-items:center;justify-content:center;border:1px dashed rgba(255,193,7,0.2);">
+          <i class="fas fa-video-slash" style="font-size:2rem;color:#555;"></i>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

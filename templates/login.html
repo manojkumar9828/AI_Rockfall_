@@ -1,0 +1,71 @@
+{% extends "base.html" %}
+{% block title %}Login — RockGuard AI{% endblock %}
+
+{% block content %}
+<div class="auth-wrapper">
+  <div class="auth-card glass">
+    <div class="text-center mb-4">
+      <div style="width:70px;height:70px;border-radius:50%;background:linear-gradient(135deg,var(--color-yellow),var(--color-orange));display:flex;align-items:center;justify-content:center;margin:0 auto 1rem;">
+        <i class="fas fa-mountain" style="font-size:2rem;color:#000;"></i>
+      </div>
+      <h2>Welcome Back</h2>
+      <p class="subtitle">Sign in to access the monitoring system</p>
+    </div>
+
+    <!-- Tabs -->
+    <ul class="nav nav-pills nav-justified mb-4" id="authTabs">
+      <li class="nav-item">
+        <button class="nav-link {% if not tab or tab == 'login' %}active{% endif %}" data-bs-toggle="pill" data-bs-target="#loginPane">
+          <i class="fas fa-sign-in-alt"></i> Login
+        </button>
+      </li>
+      <li class="nav-item">
+        <button class="nav-link {% if tab == 'register' %}active{% endif %}" data-bs-toggle="pill" data-bs-target="#registerPane">
+          <i class="fas fa-user-plus"></i> Register
+        </button>
+      </li>
+    </ul>
+
+    <div class="tab-content">
+      <!-- Login -->
+      <div class="tab-pane fade {% if not tab or tab == 'login' %}show active{% endif %}" id="loginPane">
+        <form method="POST" action="{{ url_for('login') }}">
+          <div class="mb-3">
+            <label class="form-label-rockfall">Username</label>
+            <input type="text" name="username" class="form-control-rockfall" placeholder="Enter username" required autofocus>
+          </div>
+          <div class="mb-3">
+            <label class="form-label-rockfall">Password</label>
+            <input type="password" name="password" class="form-control-rockfall" placeholder="Enter password" required>
+          </div>
+          <button type="submit" class="btn btn-rockfall w-100 mb-3"><i class="fas fa-sign-in-alt"></i> Sign In</button>
+        </form>
+        <div class="glass p-3" style="border-radius:10px;">
+          <p class="small mb-1 text-muted"><strong>Demo Credentials:</strong></p>
+          <p class="small mb-1"><i class="fas fa-user-shield text-warning"></i> Admin: <code>admin / admin123</code></p>
+          <p class="small mb-0"><i class="fas fa-user text-warning"></i> User: <code>user / user123</code></p>
+        </div>
+      </div>
+
+      <!-- Register -->
+      <div class="tab-pane fade {% if tab == 'register' %}show active{% endif %}" id="registerPane">
+        <form method="POST" action="{{ url_for('register') }}">
+          <div class="mb-3">
+            <label class="form-label-rockfall">Username</label>
+            <input type="text" name="username" class="form-control-rockfall" placeholder="Choose username" required>
+          </div>
+          <div class="mb-3">
+            <label class="form-label-rockfall">Email</label>
+            <input type="email" name="email" class="form-control-rockfall" placeholder="Enter email" required>
+          </div>
+          <div class="mb-3">
+            <label class="form-label-rockfall">Password</label>
+            <input type="password" name="password" class="form-control-rockfall" placeholder="Choose password" required>
+          </div>
+          <button type="submit" class="btn btn-rockfall w-100"><i class="fas fa-user-plus"></i> Create Account</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}
