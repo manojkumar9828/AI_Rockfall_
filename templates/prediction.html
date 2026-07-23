@@ -1,0 +1,103 @@
+{% extends "base.html" %}
+{% block title %}Prediction Result — RockGuard AI{% endblock %}
+
+{% block content %}
+<div class="container py-5">
+  <div class="row justify-content-center">
+    <div class="col-lg-10">
+      <div class="mb-4 fade-in">
+        <h1 class="fw-bold mb-1"><i class="fas fa-brain text-warning"></i> AI Prediction Result</h1>
+        <p class="text-muted mb-0">CNN model analysis and risk assessment</p>
+      </div>
+
+      <!-- Alert Banner -->
+      <div class="alert-banner {{ result.alert_type }} fade-in">
+        {% if result.alert_type == 'danger' %}
+          <i class="fas fa-exclamation-circle"></i> RED ALERT — {{ result.alert_message }}
+        {% elif result.alert_type == 'warning' %}
+          <i class="fas fa-exclamation-triangle"></i> WARNING — {{ result.alert_message }}
+        {% else %}
+          <i class="fas fa-check-circle"></i> SAFE — {{ result.alert_message }}
+        {% endif %}
+      </div>
+
+      <div class="row g-4">
+        <!-- Image -->
+        <div class="col-lg-6">
+          <div class="card-rockfall">
+            <h5 class="mb-3"><i class="fas fa-image text-warning"></i> Uploaded Image</h5>
+            <img src="{{ url_for('static', filename='uploads/' + result.filename) }}" class="prediction-image w-100" alt="Uploaded">
+          </div>
+        </div>
+
+        <!-- Result Details -->
+        <div class="col-lg-6">
+          <div class="card-rockfall">
+            <h5 class="mb-3"><i class="fas fa-clipboard-list text-warning"></i> Prediction Details</h5>
+
+            <div class="mb-3">
+              <label class="form-label-rockfall">Prediction Class</label>
+              <div class="d-flex align-items-center gap-2">
+                <span class="badge-risk {{ result.alert_type }}" style="font-size:1rem;">
+                  {% if result.class_name == 'Dangerous' %}
+                    <i class="fas fa-times-circle"></i>
+                  {% elif result.class_name == 'Warning' %}
+                    <i class="fas fa-exclamation-triangle"></i>
+                  {% else %}
+                    <i class="fas fa-check-circle"></i>
+                  {% endif %}
+                  {{ result.class_name }}
+                </span>
+              </div>
+            </div>
+
+            <div class="mb-3">
+              <label class="form-label-rockfall">Confidence Score</label>
+              <div class="d-flex justify-content-between">
+                <span class="text-white fw-bold">{{ result.confidence }}%</span>
+              </div>
+              <div class="confidence-bar">
+                <div class="confidence-bar-fill" style="width: {{ result.confidence }}%;"></div>
+              </div>
+            </div>
+
+            <div class="mb-3">
+              <label class="form-label-rockfall">Risk Level</label>
+              <div>
+                <span class="badge-risk {{ result.risk_level | lower }}">{{ result.risk_level }}</span>
+              </div>
+            </div>
+
+            <div class="mb-3">
+              <label class="form-label-rockfall">Prediction Time</label>
+              <p class="text-white mb-0">{{ result.prediction_time }} seconds</p>
+            </div>
+
+            <div class="mb-3">
+              <label class="form-label-rockfall">All Class Probabilities</label>
+              {% for cls, prob in result.all_probabilities.items() %}
+                <div class="mb-2">
+                  <div class="d-flex justify-content-between small">
+                    <span>{{ cls }}</span><span>{{ prob }}%</span>
+                  </div>
+                  <div class="confidence-bar" style="height:6px;">
+                    <div class="confidence-bar-fill" style="width: {{ prob }}%;"></div>
+                  </div>
+                </div>
+              {% endfor %}
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Actions -->
+      <div class="row g-3 mt-3">
+        <div class="col-md-3"><a href="{{ url_for('upload') }}" class="btn btn-rockfall w-100"><i class="fas fa-upload"></i> New Upload</a></div>
+        <div class="col-md-3"><a href="{{ url_for('dashboard') }}" class="btn btn-outline-rockfall w-100"><i class="fas fa-tachometer-alt"></i> Dashboard</a></div>
+        <div class="col-md-3"><a href="{{ url_for('history') }}" class="btn btn-outline-rockfall w-100"><i class="fas fa-history"></i> History</a></div>
+        <div class="col-md-3"><button onclick="window.print()" class="btn btn-outline-rockfall w-100"><i class="fas fa-file-pdf"></i> Download PDF</button></div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

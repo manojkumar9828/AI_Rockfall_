@@ -1,0 +1,76 @@
+{% extends "base.html" %}
+{% block title %}Settings — RockGuard AI{% endblock %}
+
+{% block content %}
+<div class="container py-5">
+  <div class="row justify-content-center">
+    <div class="col-lg-8">
+      <div class="mb-4 fade-in">
+        <h1 class="fw-bold mb-1"><i class="fas fa-cog text-warning"></i> Settings</h1>
+        <p class="text-muted mb-0">Configure prediction thresholds and alert sensitivity</p>
+      </div>
+
+      <div class="card-rockfall">
+        <form method="POST">
+          <div class="mb-4">
+            <label class="form-label-rockfall">Confidence Threshold (%)</label>
+            <input type="number" name="threshold" class="form-control-rockfall" min="0" max="100" step="0.1" value="{{ settings.threshold }}">
+            <p class="small text-muted mt-1">Predictions below this confidence will be flagged for review.</p>
+          </div>
+
+          <div class="mb-4">
+            <label class="form-label-rockfall">Alert Sensitivity</label>
+            <select name="sensitivity" class="form-control-rockfall">
+              <option value="low" {% if settings.sensitivity == 'low' %}selected{% endif %}>Low — Fewer alerts</option>
+              <option value="medium" {% if settings.sensitivity == 'medium' %}selected{% endif %}>Medium — Balanced</option>
+              <option value="high" {% if settings.sensitivity == 'high' %}selected{% endif %}>High — More alerts</option>
+            </select>
+          </div>
+
+          <div class="mb-4">
+            <label class="form-label-rockfall">Theme</label>
+            <select name="theme" class="form-control-rockfall">
+              <option value="dark" {% if settings.theme == 'dark' %}selected{% endif %}>Dark Mining (Default)</option>
+              <option value="midnight" {% if settings.theme == 'midnight' %}selected{% endif %}>Midnight</option>
+              <option value="industrial" {% if settings.theme == 'industrial' %}selected{% endif %}>Industrial</option>
+            </select>
+          </div>
+
+          <button type="submit" class="btn btn-rockfall"><i class="fas fa-save"></i> Save Settings</button>
+        </form>
+      </div>
+
+      <!-- Additional Features -->
+      <div class="card-rockfall mt-4">
+        <h5><i class="fas fa-plug text-warning"></i> Additional Features (Placeholders)</h5>
+        <div class="row g-3 mt-1">
+          <div class="col-md-6">
+            <div class="d-flex align-items-center gap-3 p-3" style="background:rgba(255,255,255,0.03);border-radius:10px;">
+              <i class="fas fa-envelope text-warning" style="font-size:1.5rem;"></i>
+              <div><strong>Email Alerts</strong><p class="small text-muted mb-0">Send alerts to registered emails</p></div>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="d-flex align-items-center gap-3 p-3" style="background:rgba(255,255,255,0.03);border-radius:10px;">
+              <i class="fas fa-sms text-warning" style="font-size:1.5rem;"></i>
+              <div><strong>SMS Alerts</strong><p class="small text-muted mb-0">SMS notification placeholder</p></div>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="d-flex align-items-center gap-3 p-3" style="background:rgba(255,255,255,0.03);border-radius:10px;">
+              <i class="fas fa-video text-warning" style="font-size:1.5rem;"></i>
+              <div><strong>Live Camera</strong><p class="small text-muted mb-0">Real-time camera detection</p></div>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="d-flex align-items-center gap-3 p-3" style="background:rgba(255,255,255,0.03);border-radius:10px;">
+              <i class="fas fa-map-marker-alt text-warning" style="font-size:1.5rem;"></i>
+              <div><strong>GPS Location</strong><p class="small text-muted mb-0">Geolocation tagging</p></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

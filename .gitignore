@@ -1,0 +1,16 @@
+logs
+*.log
+node_modules
+.venv/
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+.Python
+env/
+venv/
+.idea/
+.vscode/
+*.local
+database.db
+.env

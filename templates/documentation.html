@@ -1,0 +1,209 @@
+{% extends "base.html" %}
+{% block title %}Documentation — RockGuard AI{% endblock %}
+
+{% block content %}
+<div class="container py-5">
+  <div class="mb-4 fade-in">
+    <h1 class="fw-bold mb-1"><i class="fas fa-book text-warning"></i> Project Documentation</h1>
+    <p class="text-muted mb-0">Complete technical documentation for the AI-Based Rockfall Prediction System</p>
+  </div>
+
+  <!-- TOC -->
+  <div class="card-rockfall mb-4">
+    <h5><i class="fas fa-list text-warning"></i> Table of Contents</h5>
+    <div class="row mt-2">
+      <div class="col-md-4"><a href="#abstract">1. Abstract</a></div>
+      <div class="col-md-4"><a href="#intro">2. Introduction</a></div>
+      <div class="col-md-4"><a href="#problem">3. Problem Statement</a></div>
+      <div class="col-md-4"><a href="#objectives">4. Objectives</a></div>
+      <div class="col-md-4"><a href="#literature">5. Literature Survey</a></div>
+      <div class="col-md-4"><a href="#methodology">6. Methodology</a></div>
+      <div class="col-md-4"><a href="#architecture">7. System Architecture</a></div>
+      <div class="col-md-4"><a href="#diagrams">8. UML &amp; Flow Diagrams</a></div>
+      <div class="col-md-4"><a href="#advantages">9. Advantages</a></div>
+      <div class="col-md-4"><a href="#applications">10. Applications</a></div>
+      <div class="col-md-4"><a href="#future">11. Future Scope</a></div>
+      <div class="col-md-4"><a href="#conclusion">12. Conclusion</a></div>
+      <div class="col-md-4"><a href="#references">13. References</a></div>
+    </div>
+  </div>
+
+  <div class="card-rockfall mb-4" id="abstract">
+    <h4 class="text-warning">1. Abstract</h4>
+    <p>Rockfall hazards in open pit mines pose significant risks to personnel safety, equipment, and productivity. Traditional monitoring methods rely on manual visual inspections, which are subjective and limited in coverage. This project presents an AI-based rockfall prediction and alert system using a Convolutional Neural Network (CNN) to classify mine slope images into Safe, Warning, and Dangerous categories. The system provides real-time alerts, stores prediction history in a database, and generates analytical reports. The CNN model, trained on image data with data augmentation, achieves high classification accuracy. The web-based interface, built with Flask and Bootstrap, enables easy deployment in mining environments.</p>
+  </div>
+
+  <div class="card-rockfall mb-4" id="intro">
+    <h4 class="text-warning">2. Introduction</h4>
+    <p>Mining is a critical industry that supplies raw materials for infrastructure, manufacturing, and energy production. Open pit mining is the most common surface mining method, but it exposes workers to rockfall hazards from unstable slope formations. Factors such as weathering, blasting vibrations, and geological discontinuities can trigger sudden rockfalls without warning.</p>
+    <p class="mt-2">Advances in deep learning, particularly CNNs, have made image-based classification a viable approach for geotechnical monitoring. This project leverages a CNN model to analyze mine slope photographs and predict rockfall risk, generating automated alerts for mine safety teams.</p>
+  </div>
+
+  <div class="card-rockfall mb-4" id="problem">
+    <h4 class="text-warning">3. Problem Statement</h4>
+    <p>Existing rockfall monitoring in open pit mines depends on periodic human inspection, which is:</p>
+    <ul>
+      <li>Subjective and prone to human error</li>
+      <li>Limited by inspector availability and visibility conditions</li>
+      <li>Unable to provide continuous, real-time monitoring</li>
+      <li>Slow to trigger evacuation in critical situations</li>
+    </ul>
+    <p class="mt-2">There is a need for an automated, AI-powered system that can continuously assess slope stability from images and generate instant alerts.</p>
+  </div>
+
+  <div class="card-rockfall mb-4" id="objectives">
+    <h4 class="text-warning">4. Objectives</h4>
+    <ol>
+      <li>Develop a CNN model to classify mine slope images into Safe, Warning, and Dangerous categories.</li>
+      <li>Build a web-based interface for image upload, prediction, and alert display.</li>
+      <li>Implement an alert system with color-coded risk indicators.</li>
+      <li>Store all predictions in a database with search and export capabilities.</li>
+      <li>Generate daily, weekly, and monthly reports with visual analytics.</li>
+      <li>Provide an admin panel for user and system management.</li>
+    </ol>
+  </div>
+
+  <div class="card-rockfall mb-4" id="literature">
+    <h4 class="text-warning">5. Literature Survey</h4>
+    <p>Research in rockfall prediction has evolved from traditional geotechnical analysis to machine learning approaches. Early systems used sensor-based monitoring (extensometers, piezometers) for displacement measurement. Recent studies apply CNNs to satellite and drone imagery for slope stability assessment. Key references include:</p>
+    <ul>
+      <li>Wolf et al. (2020) — CNN-based landslide detection from remote sensing imagery.</li>
+      <li>Krizhevsky et al. (2012) — AlexNet architecture establishing CNN effectiveness for image classification.</li>
+      <li>Simonyan &amp; Zisserman (2014) — VGGNet demonstrating depth benefits in CNNs.</li>
+      <li>He et al. (2015) — ResNet with residual connections for very deep networks.</li>
+    </ul>
+  </div>
+
+  <div class="card-rockfall mb-4" id="methodology">
+    <h4 class="text-warning">6. Methodology</h4>
+    <p>The system follows a pipeline approach:</p>
+    <ol>
+      <li><strong>Data Collection:</strong> Mine slope images categorized into Safe, Warning, and Dangerous folders.</li>
+      <li><strong>Preprocessing:</strong> Images resized to 224x224, normalized to [0,1] range.</li>
+      <li><strong>Augmentation:</strong> Rotation, shifting, flipping, and zoom applied to increase dataset diversity.</li>
+      <li><strong>Model Training:</strong> CNN with 4 convolutional blocks, batch normalization, and dropout trained using Adam optimizer.</li>
+      <li><strong>Inference:</strong> Uploaded images processed and classified in real time.</li>
+      <li><strong>Alert Generation:</strong> Based on prediction class, appropriate alerts are generated and stored.</li>
+    </ol>
+  </div>
+
+  <div class="card-rockfall mb-4" id="architecture">
+    <h4 class="text-warning">7. System Architecture</h4>
+    <p>The system follows a three-tier architecture:</p>
+    <ul>
+      <li><strong>Presentation Tier:</strong> HTML5, CSS3, Bootstrap 5, Chart.js, Font Awesome</li>
+      <li><strong>Application Tier:</strong> Python Flask with Blueprints, session management</li>
+      <li><strong>Data Tier:</strong> SQLite database (Users, Predictions, Alerts, Reports, SystemLogs)</li>
+      <li><strong>AI Tier:</strong> TensorFlow/Keras CNN model for image classification</li>
+    </ul>
+    <p class="mt-2"><strong>Prediction Flow:</strong> Uploaded Image &rarr; CNN Model &rarr; Prediction &rarr; Confidence Score &rarr; Risk Level &rarr; Alert Generation &rarr; Save to Database &rarr; Display Dashboard</p>
+  </div>
+
+  <div class="card-rockfall mb-4" id="diagrams">
+    <h4 class="text-warning">8. UML &amp; Flow Diagrams</h4>
+    <h6 class="mt-3">Use Case Diagram</h6>
+    <pre style="background:rgba(0,0,0,0.4);padding:1rem;border-radius:8px;overflow-x:auto;">
+[Admin] ----> (Login) ----> (Manage Users) ----> (View All Predictions)
+   |----> (View System Logs) ----> (Generate Reports)
+[User] ----> (Login) ----> (Upload Image) ----> (View Prediction)
+   |----> (View History) ----> (Export CSV) ----> (View Dashboard)
+   |----> (Generate Reports) ----> (Settings)
+</pre>
+    <h6 class="mt-3">Data Flow Diagram (Level 1)</h6>
+    <pre style="background:rgba(0,0,0,0.4);padding:1rem;border-radius:8px;overflow-x:auto;">
+[User] --(Image)--> [Upload Module] --(Image File)--> [CNN Model]
+[CNN Model] --(Prediction+Confidence)--> [Alert System]
+[Alert System] --(Alert Data)--> [Database]
+[Database] --(Records)--> [Dashboard] --(Stats)--> [User]
+</pre>
+    <h6 class="mt-3">Activity Diagram</h6>
+    <pre style="background:rgba(0,0,0,0.4);padding:1rem;border-radius:8px;overflow-x:auto;">
+Start -> Login -> Upload Image -> Preview -> CNN Predict
+  -> Classify (Safe/Warning/Dangerous) -> Generate Alert
+  -> Save to DB -> Show Result -> End
+</pre>
+    <h6 class="mt-3">Sequence Diagram</h6>
+    <pre style="background:rgba(0,0,0,0.4);padding:1rem;border-radius:8px;overflow-x:auto;">
+User -> Browser: Upload image
+Browser -> Flask: POST /upload
+Flask -> FileSystem: Save image
+Flask -> CNN Model: predict(image)
+CNN Model -> Flask: {class, confidence, risk}
+Flask -> Database: Save prediction + alert
+Flask -> Browser: Render prediction result
+</pre>
+    <h6 class="mt-3">ER Diagram</h6>
+    <pre style="background:rgba(0,0,0,0.4);padding:1rem;border-radius:8px;overflow-x:auto;">
+Users (id, username, email, password_hash, role, created_at)
+   ||--< Predictions (id, user_id, image_name, prediction, confidence, risk_level, date, time)
+            ||--< Alerts (id, prediction_id, alert_type, message, date, time)
+Reports (id, user_id, report_type, start_date, end_date, stats, created_at)
+SystemLogs (id, user_id, action, details, created_at)
+</pre>
+    <h6 class="mt-3">Flowchart</h6>
+    <pre style="background:rgba(0,0,0,0.4);padding:1rem;border-radius:8px;overflow-x:auto;">
+[Start] -> [Login] -> [Upload Image] -> [Preprocess 224x224]
+  -> [CNN Prediction] -> [Confidence > Threshold?]
+    -> Yes: [Classify] -> [Dangerous?] -> [RED ALERT + Evacuation]
+                      -> [Warning?]  -> [ORANGE ALERT]
+                      -> [Safe?]     -> [GREEN]
+    -> No: [Flag for Review]
+  -> [Save to Database] -> [Update Dashboard] -> [End]
+</pre>
+  </div>
+
+  <div class="card-rockfall mb-4" id="advantages">
+    <h4 class="text-warning">9. Advantages</h4>
+    <ul>
+      <li>Real-time AI-powered rockfall risk assessment</li>
+      <li>Reduces human error and subjective judgment</li>
+      <li>Automated alert generation for faster evacuation response</li>
+      <li>Historical data tracking for trend analysis</li>
+      <li>Web-based, accessible from any device</li>
+      <li>Scalable to multiple mine sites</li>
+    </ul>
+  </div>
+
+  <div class="card-rockfall mb-4" id="applications">
+    <h4 class="text-warning">10. Applications</h4>
+    <ul>
+      <li>Open pit metal and mineral mines (iron ore, copper, gold)</li>
+      <li>Quarry operations and aggregate mining</li>
+      <li>Highway and railway rock slope monitoring</li>
+      <li>Construction site excavation safety</li>
+      <li>Geological hazard assessment</li>
+    </ul>
+  </div>
+
+  <div class="card-rockfall mb-4" id="future">
+    <h4 class="text-warning">11. Future Scope</h4>
+    <ul>
+      <li>Integration with live CCTV cameras for continuous monitoring</li>
+      <li>Drone-based image capture for inaccessible slope areas</li>
+      <li>SMS and email alert integration for remote notification</li>
+      <li>IoT sensor fusion (vibration, displacement) with image data</li>
+      <li>Transfer learning with larger datasets for improved accuracy</li>
+      <li>Mobile application for field operators</li>
+    </ul>
+  </div>
+
+  <div class="card-rockfall mb-4" id="conclusion">
+    <h4 class="text-warning">12. Conclusion</h4>
+    <p>The AI-Based Rockfall Prediction and Alert System demonstrates the effective application of deep learning to mine safety. The CNN model successfully classifies slope images into risk categories, enabling proactive hazard management. The web interface provides an intuitive platform for image upload, prediction viewing, history tracking, and report generation. This system has the potential to significantly reduce rockfall-related accidents in open pit mines by providing early warning and automated alerts.</p>
+  </div>
+
+  <div class="card-rockfall mb-4" id="references">
+    <h4 class="text-warning">13. References</h4>
+    <ol>
+      <li>Krizhevsky, A., Sutskever, I., &amp; Hinton, G. E. (2012). ImageNet classification with deep CNNs. NeurIPS.</li>
+      <li>Simonyan, K., &amp; Zisserman, A. (2014). Very deep convolutional networks for large-scale image recognition. arXiv:1409.1556.</li>
+      <li>He, K., et al. (2015). Deep residual learning for image recognition. arXiv:1512.03385.</li>
+      <li>Wolf, B., et al. (2020). CNN-based landslide detection from remote sensing imagery. Remote Sensing.</li>
+      <li>Abadi, M., et al. (2016). TensorFlow: A system for large-scale machine learning. OSDI.</li>
+      <li>Chollet, F. (2015). Keras. https://keras.io</li>
+      <li>McKinney, W. (2010). Data structures for statistical computing in Python. SciPy.</li>
+      <li>DGMS (Directorate General of Mines Safety). Standards for slope stability in open pit mines.</li>
+    </ol>
+  </div>
+</div>
+{% endblock %}

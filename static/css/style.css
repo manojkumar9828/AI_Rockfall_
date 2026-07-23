@@ -1,0 +1,554 @@
+/* ============================================================
+   AI Rockfall Prediction System — Dark Mining Theme
+   Colors: Black, Dark Gray, Yellow, Orange, Red
+   ============================================================ */
+
+:root {
+  --color-black: #0a0a0a;
+  --color-dark: #141414;
+  --color-dark-2: #1e1e1e;
+  --color-dark-3: #2a2a2a;
+  --color-gray: #3a3a3a;
+  --color-yellow: #FFC107;
+  --color-orange: #FF6F00;
+  --color-red: #D32F2F;
+  --color-green: #2E7D32;
+  --color-text: #e0e0e0;
+  --color-text-dim: #999;
+  --color-glass: rgba(30, 30, 30, 0.65);
+  --color-glass-border: rgba(255, 193, 7, 0.15);
+  --radius: 14px;
+  --shadow: 0 8px 32px rgba(0, 0, 0, 0.6);
+  --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+  font-family: 'Segoe UI', 'Inter', system-ui, -apple-system, sans-serif;
+  background: var(--color-black);
+  color: var(--color-text);
+  min-height: 100vh;
+  line-height: 1.6;
+}
+
+/* Animated background grid */
+body::before {
+  content: '';
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background-image:
+    linear-gradient(rgba(255, 193, 7, 0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 193, 7, 0.03) 1px, transparent 1px);
+  background-size: 40px 40px;
+  z-index: -2;
+  pointer-events: none;
+}
+
+body::after {
+  content: '';
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: radial-gradient(ellipse at top, rgba(255, 111, 0, 0.08), transparent 60%);
+  z-index: -1;
+  pointer-events: none;
+}
+
+a { color: var(--color-yellow); text-decoration: none; transition: var(--transition); }
+a:hover { color: var(--color-orange); }
+
+/* ---- Glassmorphism ---- */
+.glass {
+  background: var(--color-glass);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid var(--color-glass-border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+}
+
+/* ---- Navbar ---- */
+.navbar-rockfall {
+  background: rgba(10, 10, 10, 0.85);
+  backdrop-filter: blur(15px);
+  border-bottom: 1px solid rgba(255, 193, 7, 0.2);
+  padding: 0.8rem 0;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+}
+
+.navbar-rockfall .navbar-brand {
+  font-weight: 800;
+  font-size: 1.3rem;
+  color: var(--color-yellow) !important;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.navbar-rockfall .nav-link {
+  color: var(--color-text-dim) !important;
+  font-weight: 500;
+  padding: 0.5rem 1rem !important;
+  border-radius: 8px;
+  transition: var(--transition);
+}
+
+.navbar-rockfall .nav-link:hover,
+.navbar-rockfall .nav-link.active {
+  color: var(--color-yellow) !important;
+  background: rgba(255, 193, 7, 0.08);
+}
+
+.navbar-rockfall .nav-link i { margin-right: 6px; }
+
+/* ---- Hero ---- */
+.hero {
+  position: relative;
+  min-height: 92vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  overflow: hidden;
+  background: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 50%, #0a0a0a 100%);
+}
+
+.hero-bg {
+  position: absolute;
+  inset: 0;
+  background: url('https://images.pexels.com/photos/2086361/pexels-photo-2086361.jpeg?auto=compress&cs=tinysrgb&w=1600') center/cover;
+  opacity: 0.25;
+  z-index: 0;
+}
+
+.hero-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to bottom, rgba(10,10,10,0.5), rgba(10,10,10,0.9));
+  z-index: 1;
+}
+
+.hero-content { position: relative; z-index: 2; padding: 2rem; }
+
+.hero h1 {
+  font-size: 3.5rem;
+  font-weight: 800;
+  color: #fff;
+  margin-bottom: 1rem;
+  letter-spacing: -1px;
+  animation: fadeInUp 0.8s ease;
+}
+
+.hero h1 .highlight { color: var(--color-yellow); }
+
+.hero p {
+  font-size: 1.25rem;
+  color: var(--color-text-dim);
+  max-width: 700px;
+  margin: 0 auto 2rem;
+  animation: fadeInUp 1s ease;
+}
+
+.hero .badge-tag {
+  display: inline-block;
+  padding: 0.4rem 1.2rem;
+  background: rgba(255, 193, 7, 0.1);
+  border: 1px solid var(--color-yellow);
+  border-radius: 50px;
+  color: var(--color-yellow);
+  font-size: 0.85rem;
+  font-weight: 600;
+  margin-bottom: 1.5rem;
+  animation: fadeInUp 0.6s ease;
+}
+
+/* ---- Buttons ---- */
+btn-primary, .btn-rockfall {
+  background: linear-gradient(135deg, var(--color-yellow), var(--color-orange));
+  color: #000;
+  font-weight: 700;
+  border: none;
+  padding: 0.7rem 2rem;
+  border-radius: 10px;
+  transition: var(--transition);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.btn-rockfall:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(255, 111, 0, 0.4);
+  color: #000;
+}
+
+.btn-outline-rockfall {
+  background: transparent;
+  border: 2px solid var(--color-yellow);
+  color: var(--color-yellow);
+  font-weight: 600;
+  padding: 0.65rem 1.8rem;
+  border-radius: 10px;
+  transition: var(--transition);
+}
+
+.btn-outline-rockfall:hover {
+  background: var(--color-yellow);
+  color: #000;
+  transform: translateY(-2px);
+}
+
+/* ---- Cards ---- */
+.card-rockfall {
+  background: var(--color-glass);
+  backdrop-filter: blur(12px);
+  border: 1px solid var(--color-glass-border);
+  border-radius: var(--radius);
+  padding: 2rem;
+  transition: var(--transition);
+  height: 100%;
+}
+
+.card-rockfall:hover {
+  transform: translateY(-5px);
+  border-color: rgba(255, 193, 7, 0.4);
+  box-shadow: 0 12px 40px rgba(255, 111, 0, 0.15);
+}
+
+.card-rockfall .icon-circle {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+  margin-bottom: 1.2rem;
+  background: rgba(255, 193, 7, 0.1);
+  color: var(--color-yellow);
+  border: 1px solid rgba(255, 193, 7, 0.2);
+}
+
+.card-rockfall h3 { color: #fff; font-size: 1.25rem; margin-bottom: 0.8rem; }
+.card-rockfall p { color: var(--color-text-dim); font-size: 0.95rem; }
+
+/* ---- Stat Cards ---- */
+.stat-card {
+  background: var(--color-glass);
+  backdrop-filter: blur(12px);
+  border: 1px solid var(--color-glass-border);
+  border-radius: var(--radius);
+  padding: 1.5rem;
+  transition: var(--transition);
+  position: relative;
+  overflow: hidden;
+}
+
+.stat-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0;
+  width: 4px;
+  height: 100%;
+  background: var(--color-yellow);
+}
+
+.stat-card.safe::before { background: var(--color-green); }
+.stat-card.warning::before { background: var(--color-orange); }
+.stat-card.danger::before { background: var(--color-red); }
+.stat-card.alert::before { background: var(--color-yellow); }
+
+.stat-card:hover { transform: translateY(-3px); border-color: rgba(255, 193, 7, 0.3); }
+
+.stat-card .stat-icon {
+  font-size: 2rem;
+  margin-bottom: 0.5rem;
+}
+
+.stat-card .stat-value {
+  font-size: 2.5rem;
+  font-weight: 800;
+  color: #fff;
+  line-height: 1;
+}
+
+.stat-card .stat-label {
+  color: var(--color-text-dim);
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-top: 0.3rem;
+}
+
+/* ---- Sections ---- */
+.section { padding: 5rem 0; }
+
+.section-title {
+  text-align: center;
+  margin-bottom: 3rem;
+}
+
+.section-title h2 {
+  font-size: 2.2rem;
+  font-weight: 800;
+  color: #fff;
+  margin-bottom: 0.5rem;
+}
+
+.section-title h2 .highlight { color: var(--color-yellow); }
+
+.section-title p { color: var(--color-text-dim); font-size: 1.1rem; }
+
+.section-title .underline {
+  width: 60px;
+  height: 4px;
+  background: linear-gradient(90deg, var(--color-yellow), var(--color-orange));
+  margin: 1rem auto;
+  border-radius: 2px;
+}
+
+/* ---- Team ---- */
+.team-card {
+  text-align: center;
+  padding: 2rem 1.5rem;
+  transition: var(--transition);
+}
+
+.team-card .avatar {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  margin: 0 auto 1rem;
+  background: linear-gradient(135deg, var(--color-yellow), var(--color-orange));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2.5rem;
+  color: #000;
+  font-weight: 800;
+  border: 3px solid rgba(255, 193, 7, 0.3);
+}
+
+.team-card h4 { color: #fff; margin-bottom: 0.3rem; }
+.team-card .role { color: var(--color-yellow); font-size: 0.9rem; font-weight: 600; }
+.team-card p { color: var(--color-text-dim); font-size: 0.85rem; margin-top: 0.5rem; }
+
+/* ---- Login ---- */
+.auth-wrapper {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+  background: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 100%);
+}
+
+.auth-card {
+  width: 100%;
+  max-width: 440px;
+  padding: 2.5rem;
+}
+
+.auth-card h2 {
+  color: #fff;
+  font-weight: 800;
+  margin-bottom: 0.5rem;
+}
+
+.auth-card .subtitle { color: var(--color-text-dim); margin-bottom: 2rem; }
+
+.form-control-rockfall {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 193, 7, 0.15);
+  border-radius: 10px;
+  padding: 0.75rem 1rem;
+  color: #fff;
+  width: 100%;
+  transition: var(--transition);
+}
+
+.form-control-rockfall:focus {
+  outline: none;
+  border-color: var(--color-yellow);
+  background: rgba(255, 255, 255, 0.08);
+  box-shadow: 0 0 0 3px rgba(255, 193, 7, 0.1);
+}
+
+.form-control-rockfall::placeholder { color: #666; }
+
+.form-label-rockfall {
+  color: var(--color-text-dim);
+  font-size: 0.85rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-bottom: 0.4rem;
+}
+
+/* ---- Prediction ---- */
+.prediction-result {
+  text-align: center;
+  padding: 2rem;
+}
+
+.alert-banner {
+  padding: 1.5rem 2rem;
+  border-radius: var(--radius);
+  margin: 1.5rem 0;
+  font-size: 1.2rem;
+  font-weight: 700;
+  text-align: center;
+  animation: pulse 2s infinite;
+}
+
+.alert-banner.danger {
+  background: rgba(211, 47, 47, 0.15);
+  border: 2px solid var(--color-red);
+  color: #ff5252;
+}
+
+.alert-banner.warning {
+  background: rgba(255, 111, 0, 0.15);
+  border: 2px solid var(--color-orange);
+  color: var(--color-orange);
+}
+
+.alert-banner.safe {
+  background: rgba(46, 125, 50, 0.15);
+  border: 2px solid var(--color-green);
+  color: #66bb6a;
+}
+
+.prediction-image {
+  max-width: 100%;
+  border-radius: var(--radius);
+  border: 2px solid rgba(255, 193, 7, 0.2);
+}
+
+.confidence-bar {
+  height: 10px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 5px;
+  overflow: hidden;
+  margin-top: 0.5rem;
+}
+
+.confidence-bar-fill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--color-yellow), var(--color-orange));
+  border-radius: 5px;
+  transition: width 1s ease;
+}
+
+/* ---- Upload ---- */
+.upload-zone {
+  border: 2px dashed rgba(255, 193, 7, 0.3);
+  border-radius: var(--radius);
+  padding: 3rem 2rem;
+  text-align: center;
+  transition: var(--transition);
+  cursor: pointer;
+}
+
+.upload-zone:hover, .upload-zone.dragover {
+  border-color: var(--color-yellow);
+  background: rgba(255, 193, 7, 0.05);
+}
+
+.upload-zone i { font-size: 3rem; color: var(--color-yellow); margin-bottom: 1rem; }
+
+/* ---- Tables ---- */
+.table-rockfall {
+  color: var(--color-text);
+  width: 100%;
+}
+
+.table-rockfall thead th {
+  color: var(--color-yellow);
+  border-bottom: 2px solid rgba(255, 193, 7, 0.2);
+  font-weight: 700;
+  text-transform: uppercase;
+  font-size: 0.8rem;
+  letter-spacing: 0.5px;
+  padding: 1rem;
+}
+
+.table-rockfall tbody td {
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  padding: 1rem;
+  vertical-align: middle;
+}
+
+.table-rockfall tbody tr:hover { background: rgba(255, 193, 7, 0.03); }
+
+/* ---- Badges ---- */
+.badge-risk { padding: 0.4rem 0.9rem; border-radius: 50px; font-size: 0.75rem; font-weight: 700; }
+.badge-risk.safe { background: rgba(46, 125, 50, 0.2); color: #66bb6a; }
+.badge-risk.warning { background: rgba(255, 111, 0, 0.2); color: var(--color-orange); }
+.badge-risk.danger { background: rgba(211, 47, 47, 0.2); color: #ff5252; }
+.badge-risk.low { background: rgba(46, 125, 50, 0.2); color: #66bb6a; }
+.badge-risk.medium { background: rgba(255, 111, 0, 0.2); color: var(--color-orange); }
+.badge-risk.high { background: rgba(211, 47, 47, 0.2); color: #ff5252; }
+
+/* ---- Footer ---- */
+.footer {
+  background: rgba(10, 10, 10, 0.9);
+  border-top: 1px solid rgba(255, 193, 7, 0.15);
+  padding: 2.5rem 0;
+  color: var(--color-text-dim);
+  text-align: center;
+}
+
+.footer a { color: var(--color-text-dim); }
+.footer a:hover { color: var(--color-yellow); }
+
+/* ---- Animations ---- */
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(30px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.7; }
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+.fade-in { animation: fadeInUp 0.6s ease; }
+
+.spinner {
+  width: 40px;
+  height: 40px;
+  border: 4px solid rgba(255, 193, 7, 0.2);
+  border-top-color: var(--color-yellow);
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+  margin: 2rem auto;
+}
+
+/* ---- Responsive ---- */
+@media (max-width: 768px) {
+  .hero h1 { font-size: 2rem; }
+  .hero p { font-size: 1rem; }
+  .stat-card .stat-value { font-size: 1.8rem; }
+  .section { padding: 3rem 0; }
+  .section-title h2 { font-size: 1.6rem; }
+}
+
+/* ---- Scrollbar ---- */
+::-webkit-scrollbar { width: 8px; }
+::-webkit-scrollbar-track { background: var(--color-dark); }
+::-webkit-scrollbar-thumb { background: var(--color-gray); border-radius: 4px; }
+::-webkit-scrollbar-thumb:hover { background: var(--color-yellow); }
+
+/* ---- Flash messages ---- */
+.flash-container { position: fixed; top: 80px; right: 20px; z-index: 2000; max-width: 350px; }
+.flash-msg { padding: 1rem 1.5rem; border-radius: 10px; margin-bottom: 0.5rem; animation: fadeInUp 0.4s ease; }
+.flash-msg.success { background: rgba(46, 125, 50, 0.2); border: 1px solid var(--color-green); color: #66bb6a; }
+.flash-msg.danger { background: rgba(211, 47, 47, 0.2); border: 1px solid var(--color-red); color: #ff5252; }
+.flash-msg.warning { background: rgba(255, 111, 0, 0.2); border: 1px solid var(--color-orange); color: var(--color-orange); }
+.flash-msg.info { background: rgba(255, 193, 7, 0.15); border: 1px solid var(--color-yellow); color: var(--color-yellow); }
