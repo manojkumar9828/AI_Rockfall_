@@ -16,3 +16,4 @@ joblib==1.5.3
 h5py==3.14.0
 protobuf==7.35.1
 matplotlib==3.11.0
+gunicorn==23.0.0
